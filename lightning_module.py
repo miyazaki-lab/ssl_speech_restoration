@@ -426,16 +426,19 @@ class SSLBaseModule(pl.LightningModule):
         for lg in self.logger.experiment:
             if type(lg).__name__ == "SummaryWriter":
                 tensorboard = lg
+            else:
+                tensorboard = None
         for key in logger_dict.keys():
-            manual_logging(
-                logger=tensorboard,
-                item=logger_dict[key],
-                idx=0,
-                tag=key,
-                global_step=self.global_step,
-                data_type=data_type,
-                config=self.config,
-            )
+            if tensorboard is not None:
+                manual_logging(
+                    logger=tensorboard,
+                    item=logger_dict[key],
+                    idx=0,
+                    tag=key,
+                    global_step=self.global_step,
+                    data_type=data_type,
+                    config=self.config,
+                )
 
 
 class SSLStepLightningModule(SSLBaseModule):

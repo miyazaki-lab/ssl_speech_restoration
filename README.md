@@ -17,7 +17,16 @@ Official implementation of [SelfRemaster: Self-Supervised Speech Restoration wit
     - Downsample them to 22.05 kHz and place them under `data/` as `jsut_22k` and `jvs_22k`.
         - JSUT is a single-speaker dataset and requires the structure as `jsut_22k/*.wav`. Note that this is the ground-truth clean speech data which correspond to the simulated data and is not used for training. You may want to use `jsut_22k` only to compare the restored speech and ground-truth speech.
         - JVS parallel100 includes 100-speaker data and requires the structure as `jvs_22k/${spkr_name}/*.wav`. This is a clean speech dataset used for the backward learning of the dual-learning method. 
-    - Place simulated low-quality data under `./data` as `jsut_22k-low`.
+    - Place simulated low-quality data under `./data` as `jsut_22k-low`.  
+    これを用意するために以下のコマンドを実行しました。
+    ```shell
+    python simulated_data.py \
+        --in_dir data/jsut_22k \
+        --out_dir data/jsut_22k-low \
+        --corpus_type single \
+        --deg_type lowpass
+    ```
+    - sox のインストールと、これ（https://superuser.com/questions/1819222/how-to-install-sox-for-pytorch-audio）も必要でした。
 - Or you can use arbitrary datasets by modifying config files.
 
 ## Training

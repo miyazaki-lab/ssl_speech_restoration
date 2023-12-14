@@ -40,7 +40,7 @@ def get_arg():
     parser.add_argument(
         "--feature_loss_type", default=None, type=str, choices=["mae", "mse"]
     )
-    parser.add_argument("--debug", action="store_true")
+    parser.add_argument("--debug", action="store_true", default=False)
     return parser.parse_args()
 
 
@@ -66,7 +66,8 @@ def train(args, config, output_path):
 
     trainer = Trainer(
         max_epochs=1 if debug else config["train"]["epoch"],
-        gpus=-1,
+        accelerator="gpu",
+        gpus=[0],
         deterministic=False,
         auto_select_gpus=True,
         benchmark=True,

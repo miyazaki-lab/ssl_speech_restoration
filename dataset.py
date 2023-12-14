@@ -141,7 +141,7 @@ class Dataset(torch.utils.data.Dataset):
                     ) as fw:
                         d_preprocessed = pickle.load(fw)
                     self.d_out["wavstask"].extend(d_preprocessed["wavs"])
-                self.d_out["wavstask"] = np.asarray(self.d_out["wavstask"])
+                self.d_out["wavstask"] = np.asarray(self.d_out["wavstask"], dtype=object)
 
     def __len__(self):
         return len(self.d_out["wavs"])

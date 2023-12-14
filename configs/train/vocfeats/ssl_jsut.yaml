@@ -31,7 +31,7 @@ preprocess:
   segment_length: 2
 
 train:
-  batchsize: 4
+  batchsize: 1
   epoch: 50
   epoch_channel: 25
   multi_gpu_mode: False
